@@ -1,7 +1,10 @@
 # mCSAC
+
 Multi-Chromosome Constrained Self-Avoiding Chromatin
 
-# Please cite
+# Citation
+
+When referencing this code, please cite:
 
 (1) Gamze Gursoy, Yun Xu, and Jie Liang. "Spatial organization of budding yeast genome from landmark constraints and predicting biological chromatin interactions from Chromosome Conformation Capture Data", PLOS Comp. Bio., 2017:13(7):e1005658
 
