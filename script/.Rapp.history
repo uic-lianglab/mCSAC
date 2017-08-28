@@ -1,0 +1,1587 @@
+8.517193/70
+log(0.0102134)
+4.5/70
+log(0.00536792)
+5.2/70
+?sort
+?image
+example(image)
+help(image)
+example(heatmap)
+example(filled.contour)
+?filled.contour
+?#
+color.palette
+??#
+color.palette
+?rainbow
+?filled.contour
+?text
+example(text)
+example(mtext)
+?mtext
+?filled.contour
+help(cut)
+y <- stats::rnorm(100)
+cut(y,breaks=pi/3*(-3:3))
+table(cut(y,breaks=pi/3*(-3:3)))
+N <- 100#
+X <- sort(round(stats::rt(N, df=2), 2))#
+tt <- c(-100, seq(-2,2, len=201), +100)#
+it <- findInterval(tt, X)
+it
+X
+tt
+X
+tt[1:10]
+findInterval(tt,X)
+tt[it < 1 | it >= N]
+tt <- seq(1,10)
+tt
+tt <- seq(3,10)
+tt
+X <- tt+0.5
+findInterval(tt,X)
+findInterval(tt,X) + 1
+?cut
+cut(8,breaks=2)
+cut(c(0,8),breaks=2)
+findInterval(tt,X)
+#!/usr/bin/R#
+#
+BinSize = 60#
+#
+CELL = "K562"#
+CELL = "GM12878"#
+SIZE = 6400#
+RefContactFile = paste("ENm008_",CELL,"_",SIZE,"_SparseM_Dist.txt",sep="" )#
+RefContact = read.table(RefContactFile,skip=1)#
+NumRow = nrow(RefContact)#
+#
+MaxCon = max(RefContact[,3])#
+MinCon = min(RefContact[,3])
+aa <- read.table(pipe("pbpaste"))
+aa
+aa[,1]
+hist(aa[,1])
+198*95
+x = -log(0.00484028)
+x = -log(0.00484028)/70
+x
+x * 70
+xx <- read.table(pipe('pbpaste'))
+xx
+hist(xx[,3])
+xx <- read.table(pipe('pbpaste'))
+xx
+plot(1:87, xx[,4])
+plot(1:87, xx[,3])
+points(1:87, xx[,4],color="red")
+plot(1:87, xx[,4])
+points(1:87, xx[,3],color="red")
+points(1:87, xx[,3],col="red")
+xx <- read.table(pipe('pbpaste'))
+plot(1:87, xx[,4])
+xx
+plot(1:nrow(xx), xx[,4])
+xx <- read.table(pipe('pbpaste'))
+plot(1:nrow(xx), xx[,4])
+xx <- read.table(pipe('pbpaste'))
+plot(1:nrow(xx), xx[,4])
+xx <- read.table(pipe('pbpaste'))
+plot(1:nrow(xx), xx[,4])
+points(1:nrow(xx), xx[,3])
+xx <- read.table(pipe('pbpaste'))
+points(1:nrow(xx), xx[,3])
+plot(1:nrow(xx), xx[,4])
+points(1:nrow(xx), xx[,3])
+points(1:nrow(xx), xx[,3],col='red')
+xx <- read.table(pipe('pbpaste'))
+xx
+xx[,3]
+sort(xx[,3])
+unique(sort(xx[,3]))
+NodeInd = unique(sort(RefContact[,1]))#
+for (i in 1:length(NodeInd)){#
+	PositionStart = (NodeInd[i]-1)*BinSize + 1#
+	PositionEnd = (NodeInd[i])*BinSize#
+	cat(paste("hs16",PositionStart, PositionEnd, "AA","\n"))#
+}
+x = -log(0.00323971)/70
+x
+1/3.3
+3.4
+1/3.4
+x
+500000/60
+3.4*60
+q()
+setwd('/Users/yunxu/workspace/projects/chromatin/script')
+#!/usr/bin/R#
+#
+#------------------------------------------------------------------#
+# Parameter#
+#------------------------------------------------------------------#
+SourcePath = "data/ENm008/"#
+CELL = "GM12878"#
+CELL = "K562"#
+ReferenceCountFile = paste("data/analysis/ENm008/6400.comb.txt",sep="")#
+BinSize = 60#
+#
+#------------------------------------------------------------------#
+# Get MaxRead between GM12878 and K562#
+#------------------------------------------------------------------#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_GM12878.txt",#
+	sep="")#
+ContactFrequencyData_1 = read.table(ContactFrequencyFile)#
+#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_K562.txt",#
+	sep="")#
+ContactFrequencyData_2 = read.table(ContactFrequencyFile)#
+MaxCount = max(ContactFrequencyData_1,ContactFrequencyData_2)#
+#
+#------------------------------------------------------------------#
+# Read Contact Frequency#
+#------------------------------------------------------------------#
+#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_",CELL,".txt",#
+	sep="")#
+ContactFrequencyData = read.table(ContactFrequencyFile)#
+#
+Row_Ind_Start = as.numeric(sub(".*chr16:(.*)-(.*)","\\1",rownames(ContactFrequencyData)))#
+Row_Ind_End = as.numeric(sub(".*chr16:(.*)-(.*)","\\2",rownames(ContactFrequencyData)))#
+Row_Ind_Diff = Row_Ind_Start[2:(length(Row_Ind_Start))] - Row_Ind_End[1:(length(Row_Ind_End)-1)] #
+#
+Col_Ind_Start = as.numeric(sub(".*chr16\\.(.*)\\.(.*)","\\1",colnames(ContactFrequencyData)))#
+Col_Ind_End = as.numeric(sub(".*chr16\\.(.*)\\.(.*)","\\2",colnames(ContactFrequencyData)))#
+Col_Ind_Diff = Col_Ind_Start[2:(length(Col_Ind_Start))] - Col_Ind_End[1:(length(Col_Ind_End)-1)] #
+#
+#
+#------------------------------------------------------------------#
+# Output for circos highlight#
+#------------------------------------------------------------------#
+# Row_Str = paste("hs16",Row_Ind_Start,Row_Ind_End)#
+# Col_Str = paste("hs16",Col_Ind_Start,Col_Ind_End)#
+# #
+# of_circos_highlight = "/tmp/raw.segment.for.highlight.txt"#
+# write.table(file=of_circos_highlight,Row_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# of_circos_highlight = "/tmp/raw.segment.rev.highlight.txt"#
+# write.table(file=of_circos_highlight,Col_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+# Row_Sep_Str = paste(#
+# 	"hs16", Row_Ind_End[which(Row_Ind_Diff==0)]-2, Row_Ind_End[which(Row_Ind_Diff==0)]+2)#
+# of_circos_highlight = "/tmp/raw.segment.for.sep.highlight.txt"#
+# write.table(file=of_circos_highlight,Row_Sep_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+# Col_Sep_Str = paste(#
+# 	"hs16", Col_Ind_End[which(Col_Ind_Diff==0)]-2, Col_Ind_End[which(Col_Ind_Diff==0)]+2)#
+# of_circos_highlight = "/tmp/raw.segment.rev.sep.highlight.txt"#
+# write.table(file=of_circos_highlight,Col_Sep_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+#
+# iCount = 1#
+# LinkStr = ""#
+# for (i in 1:(length(Row_Ind_Start))){#
+# 	for (j in 1:(length(Col_Ind_Start))){#
+# 		if(ContactFrequencyData[i,j]==0){next}#
+# 		PositionStr1.1 = Row_Ind_Start[i]#
+# 		PositionStr1.2 = Row_Ind_End[i]#
+# 		PositionStr2.1 = Col_Ind_Start[j]#
+# 		PositionStr2.2 = Col_Ind_End[j]#
+# 		Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+# 		freq = sprintf("thickness=%d",ContactFrequencyData[i,j],sep="")#
+# 		maxfreq = sprintf("id=%d",MaxCount,sep="")#
+# 		params = paste(freq,",",maxfreq,sep="")#
+# 		LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+# 		LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+# 		iCount = iCount + 1#
+# 	}#
+# }#
+# #
+# of_circos_highlight = paste("/tmp/contactfreq.",CELL,".raw.txt",sep="")#
+# write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+#
+#------------------------------------------------------------------#
+# Reconstruct the reading count matrix, gap is considered.#
+#------------------------------------------------------------------#
+# Start from Col_Col_Start, Col_Ind_Start = 1#
+MinLength = min(Row_Ind_End-Row_Ind_Start,Col_Ind_End - Col_Ind_Start)#
+#
+Row_Vec = cbind(Row_Ind_Start,Row_Ind_End)#
+Col_Vec = cbind(Col_Ind_Start,Col_Ind_End)#
+All_Vec = rbind(Row_Vec,Col_Vec)#
+All_Vec_Sort = sort(All_Vec[,1],index.return=T)#
+All_Vec = All_Vec[All_Vec_Sort$ix,]#
+All_Vec_Diff = (All_Vec[,1])[2:nrow(All_Vec)] - (All_Vec[,2])[1:(nrow(All_Vec)-1)]#
+#
+# expand the gap sequence length less than min seq length#
+MinInd = which(All_Vec_Diff <MinLength & All_Vec_Diff != 0)#
+All_Vec[MinInd,2] = All_Vec[MinInd,2] + All_Vec_Diff[MinInd]#
+All_Vec_Diff[MinInd] = 0#
+#
+# insert the gap and resort, get segment interval#
+Gap_Vec = cbind((All_Vec[,2])[1:(nrow(All_Vec)-1)], (All_Vec[,2])[1:(nrow(All_Vec)-1)] + All_Vec_Diff)#
+All_Vec = rbind(All_Vec,Gap_Vec[which(All_Vec_Diff!=0),])#
+All_Vec_Sort = sort(All_Vec[,1],index.return=T)#
+All_Vec = All_Vec[All_Vec_Sort$ix,]#
+#
+nSize = nrow(All_Vec)#
+IntervalPoints = unique(sort(c(All_Vec)))#
+#
+CF.Matrix = matrix(0,nrow=nSize,ncol=nSize)#
+for ( i in 1:nrow(ContactFrequencyData)){#
+	for (j in 1:ncol(ContactFrequencyData)){#
+		r1 = findInterval(Row_Vec[i,1], IntervalPoints)#
+		r2 = findInterval(Row_Vec[i,2]-1, IntervalPoints)#
+		c1 = findInterval(Col_Vec[j,1], IntervalPoints)#
+		c2 = findInterval(Col_Vec[j,2]-1, IntervalPoints)#
+		if (r1 == r2 & c1 == c2 ){#
+			CF.Matrix[r1,c1] = CF.Matrix[c1,r1] = ContactFrequencyData[i,j]#
+		}#
+	}#
+}#
+#
+# recode index arr fo contact frequence do not equal to 0#
+ConInd_Vec = which(CF.Matrix!=0,arr.ind=T)#
+# only get upper right index#
+ConInd_Vec = ConInd_Vec[which(ConInd_Vec[,1]<ConInd_Vec[,2]),]#
+# scale matrix#
+CF.Matrix.Scale = CF.Matrix/MaxCount#
+#
+#------------------------------------------------------------------#
+# Read reference data, and merge to experimental segment#
+#------------------------------------------------------------------#
+RFData = read.table(ReferenceCountFile)#
+RFRowInd = unique(sort(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints)))#
+RFColInd = unique(sort(findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints)))#
+#
+RF.Matrix = matrix(0,nrow=nSize,ncol=nSize)#
+for (i in 1:length(RFRowInd)){#
+	RowInds = findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == RFRowInd[i]#
+	for (j in 1:length(RFColInd)){#
+		ColInds = findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == RFColInd[j]#
+		MatchInd = which( (ColInds & RowInds)==T)#
+		if (length(MatchInd) >0){#
+			RF.Matrix[i,j] = RF.Matrix[j,i] = max(RFData[MatchInd,3])#
+			cat(MatchInd,RF.Matrix[i,j],"\n")#
+		}#
+	}#
+}
+RFData = read.table(ReferenceCountFile)#
+RFRowInd = unique(sort(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints)))#
+RFColInd = unique(sort(findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints)))
+RFRowInd
+IntervalPoints
+ConInd_Vec
+ConInd_Vec
+IntervalPoints
+8274*60
+findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints
+)
+findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == 1
+findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == 1 | findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == 2
+findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints)
+findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints)
+ConInd_Vec
+RFData = read.table(ReferenceCountFile)#
+#
+RF.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))
+RF.Vec
+	i = 1#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints)) == iRow
+	i = 1#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow
+	which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)
+	RFData[which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol),3]
+RF.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in nrow(ConInd_Vec)){#
+	i = 1#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	RF.Vec[i,3] = max(#
+	RFData[which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol),3])#
+}
+RF.Vec
+RF.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	RF.Vec[i,3] = max(#
+	RFData[which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol),3])#
+}
+RF.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	MatchInd = which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)#
+	if(length(MatchInd)>0){#
+		RF.Vec[i,3] = max(RFData[MatchInd,3])#
+	}#
+}
+RF.Vec
+RF.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	MatchInd = which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)#
+	if(length(MatchInd)>0){#
+		RF.Vec[i,3] = max(RFData[MatchInd,3])#
+	}#
+}
+RF.Vec
+RF.Vec
+RFData = read.table(ReferenceCountFile)#
+#
+RF.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	MatchInd = which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)#
+	if(length(MatchInd)>0){#
+		RF.Vec[i,3] = max(RFData[MatchInd,3])#
+	}#
+}#
+RF.MaxCount = max(RF.Vec[,3])#
+RF.Vec.Scale = RF.Vec#
+RF.Vec.Scale[,3] = RF.Vec.Scale[,3]/ RF.MaxCount#
+#
+# RFRowInd = unique(sort(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints)))#
+# RFColInd = unique(sort(findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints)))#
+# #
+# RF.Matrix = matrix(0,nrow=nSize,ncol=nSize)#
+# for (i in 1:length(RFRowInd)){#
+# 	RowInds = findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == RFRowInd[i]#
+# 	for (j in 1:length(RFColInd)){#
+# 		ColInds = findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == RFColInd[j]#
+# 		MatchInd = which( (ColInds & RowInds)==T)#
+# 		if (length(MatchInd) >0){#
+# 			RF.Matrix[i,j] = RF.Matrix[j,i] = max(RFData[MatchInd,3])#
+# 			cat(MatchInd,RF.Matrix[i,j],"\n")#
+# 		}#
+# 	}#
+# }#
+#
+# RF.MaxCount = max(RF.Matrix)#
+# RF.Matrix.Scale = RF.Matrix/RF.MaxCount#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if(RF.Matrix[iRow,iCol]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",RF.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",RF.MaxCount,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/contactfreq.ensemble.txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+ls
+ls()
+RF.Vec[,3]
+sort(RF.Vec[,3])
+#!/usr/bin/R#
+rm(list=ls())#
+#------------------------------------------------------------------#
+# Parameter#
+#------------------------------------------------------------------#
+SourcePath = "data/ENm008/"#
+CELL = "GM12878"#
+CELL = "K562"#
+ReferenceCountFile = paste("data/analysis/ENm008/6400.comb.txt",sep="")#
+BinSize = 60#
+#
+#------------------------------------------------------------------#
+# Get MaxRead between GM12878 and K562#
+#------------------------------------------------------------------#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_GM12878.txt",#
+	sep="")#
+ContactFrequencyData_1 = read.table(ContactFrequencyFile)#
+#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_K562.txt",#
+	sep="")#
+ContactFrequencyData_2 = read.table(ContactFrequencyFile)#
+MaxCount = max(ContactFrequencyData_1,ContactFrequencyData_2)#
+#
+#------------------------------------------------------------------#
+# Read Contact Frequency#
+#------------------------------------------------------------------#
+#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_",CELL,".txt",#
+	sep="")#
+ContactFrequencyData = read.table(ContactFrequencyFile)#
+#
+Row_Ind_Start = as.numeric(sub(".*chr16:(.*)-(.*)","\\1",rownames(ContactFrequencyData)))#
+Row_Ind_End = as.numeric(sub(".*chr16:(.*)-(.*)","\\2",rownames(ContactFrequencyData)))#
+Row_Ind_Diff = Row_Ind_Start[2:(length(Row_Ind_Start))] - Row_Ind_End[1:(length(Row_Ind_End)-1)] #
+#
+Col_Ind_Start = as.numeric(sub(".*chr16\\.(.*)\\.(.*)","\\1",colnames(ContactFrequencyData)))#
+Col_Ind_End = as.numeric(sub(".*chr16\\.(.*)\\.(.*)","\\2",colnames(ContactFrequencyData)))#
+Col_Ind_Diff = Col_Ind_Start[2:(length(Col_Ind_Start))] - Col_Ind_End[1:(length(Col_Ind_End)-1)] #
+#
+#
+#------------------------------------------------------------------#
+# Output for circos highlight#
+#------------------------------------------------------------------#
+# Row_Str = paste("hs16",Row_Ind_Start,Row_Ind_End)#
+# Col_Str = paste("hs16",Col_Ind_Start,Col_Ind_End)#
+# #
+# of_circos_highlight = "/tmp/raw.segment.for.highlight.txt"#
+# write.table(file=of_circos_highlight,Row_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# of_circos_highlight = "/tmp/raw.segment.rev.highlight.txt"#
+# write.table(file=of_circos_highlight,Col_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+# Row_Sep_Str = paste(#
+# 	"hs16", Row_Ind_End[which(Row_Ind_Diff==0)]-2, Row_Ind_End[which(Row_Ind_Diff==0)]+2)#
+# of_circos_highlight = "/tmp/raw.segment.for.sep.highlight.txt"#
+# write.table(file=of_circos_highlight,Row_Sep_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+# Col_Sep_Str = paste(#
+# 	"hs16", Col_Ind_End[which(Col_Ind_Diff==0)]-2, Col_Ind_End[which(Col_Ind_Diff==0)]+2)#
+# of_circos_highlight = "/tmp/raw.segment.rev.sep.highlight.txt"#
+# write.table(file=of_circos_highlight,Col_Sep_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+#
+# iCount = 1#
+# LinkStr = ""#
+# for (i in 1:(length(Row_Ind_Start))){#
+# 	for (j in 1:(length(Col_Ind_Start))){#
+# 		if(ContactFrequencyData[i,j]==0){next}#
+# 		PositionStr1.1 = Row_Ind_Start[i]#
+# 		PositionStr1.2 = Row_Ind_End[i]#
+# 		PositionStr2.1 = Col_Ind_Start[j]#
+# 		PositionStr2.2 = Col_Ind_End[j]#
+# 		Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+# 		freq = sprintf("thickness=%d",ContactFrequencyData[i,j],sep="")#
+# 		maxfreq = sprintf("id=%d",MaxCount,sep="")#
+# 		params = paste(freq,",",maxfreq,sep="")#
+# 		LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+# 		LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+# 		iCount = iCount + 1#
+# 	}#
+# }#
+# #
+# of_circos_highlight = paste("/tmp/contactfreq.",CELL,".raw.txt",sep="")#
+# write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+#
+#------------------------------------------------------------------#
+# Reconstruct the reading count matrix, gap is considered.#
+#------------------------------------------------------------------#
+# Start from Col_Col_Start, Col_Ind_Start = 1#
+MinLength = min(Row_Ind_End-Row_Ind_Start,Col_Ind_End - Col_Ind_Start)#
+#
+Row_Vec = cbind(Row_Ind_Start,Row_Ind_End)#
+Col_Vec = cbind(Col_Ind_Start,Col_Ind_End)#
+All_Vec = rbind(Row_Vec,Col_Vec)#
+All_Vec_Sort = sort(All_Vec[,1],index.return=T)#
+All_Vec = All_Vec[All_Vec_Sort$ix,]#
+All_Vec_Diff = (All_Vec[,1])[2:nrow(All_Vec)] - (All_Vec[,2])[1:(nrow(All_Vec)-1)]#
+#
+# expand the gap sequence length less than min seq length#
+MinInd = which(All_Vec_Diff <MinLength & All_Vec_Diff != 0)#
+All_Vec[MinInd,2] = All_Vec[MinInd,2] + All_Vec_Diff[MinInd]#
+All_Vec_Diff[MinInd] = 0#
+#
+# insert the gap and resort, get segment interval#
+Gap_Vec = cbind((All_Vec[,2])[1:(nrow(All_Vec)-1)], (All_Vec[,2])[1:(nrow(All_Vec)-1)] + All_Vec_Diff)#
+All_Vec = rbind(All_Vec,Gap_Vec[which(All_Vec_Diff!=0),])#
+All_Vec_Sort = sort(All_Vec[,1],index.return=T)#
+All_Vec = All_Vec[All_Vec_Sort$ix,]#
+#
+nSize = nrow(All_Vec)#
+IntervalPoints = unique(sort(c(All_Vec)))#
+#
+CF.Matrix = matrix(0,nrow=nSize,ncol=nSize)#
+for ( i in 1:nrow(ContactFrequencyData)){#
+	for (j in 1:ncol(ContactFrequencyData)){#
+		r1 = findInterval(Row_Vec[i,1], IntervalPoints)#
+		r2 = findInterval(Row_Vec[i,2]-1, IntervalPoints)#
+		c1 = findInterval(Col_Vec[j,1], IntervalPoints)#
+		c2 = findInterval(Col_Vec[j,2]-1, IntervalPoints)#
+		if (r1 == r2 & c1 == c2 ){#
+			CF.Matrix[r1,c1] = CF.Matrix[c1,r1] = ContactFrequencyData[i,j]#
+		}#
+	}#
+}#
+#
+# recode index arr fo contact frequence do not equal to 0#
+ConInd_Vec = which(CF.Matrix!=0,arr.ind=T)#
+# only get upper right index#
+ConInd_Vec = ConInd_Vec[which(ConInd_Vec[,1]<ConInd_Vec[,2]),]#
+# scale matrix#
+CF.Matrix.Scale = CF.Matrix/MaxCount#
+#
+#------------------------------------------------------------------#
+# Read reference data, and merge to experimental segment#
+#------------------------------------------------------------------#
+RFData = read.table(ReferenceCountFile)#
+#
+RF.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	MatchInd = which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)#
+	if(length(MatchInd)>0){#
+		RF.Vec[i,3] = max(RFData[MatchInd,3])#
+	}#
+}#
+RF.MaxCount = max(RF.Vec[,3])#
+RF.Vec.Scale = RF.Vec#
+RF.Vec.Scale[,3] = RF.Vec.Scale[,3]/ RF.MaxCount#
+#
+# RFRowInd = unique(sort(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints)))#
+# RFColInd = unique(sort(findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints)))#
+# #
+# RF.Matrix = matrix(0,nrow=nSize,ncol=nSize)#
+# for (i in 1:length(RFRowInd)){#
+# 	RowInds = findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == RFRowInd[i]#
+# 	for (j in 1:length(RFColInd)){#
+# 		ColInds = findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == RFColInd[j]#
+# 		MatchInd = which( (ColInds & RowInds)==T)#
+# 		if (length(MatchInd) >0){#
+# 			RF.Matrix[i,j] = RF.Matrix[j,i] = max(RFData[MatchInd,3])#
+# 			cat(MatchInd,RF.Matrix[i,j],"\n")#
+# 		}#
+# 	}#
+# }#
+#
+# RF.MaxCount = max(RF.Matrix)#
+# RF.Matrix.Scale = RF.Matrix/RF.MaxCount#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if(RF.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",RF.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",RF.MaxCount,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/contactfreq.ensemble.txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+PS.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+#
+for ( i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if (RF.Matrix.Scale[iRow,iCol] == 0){#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / (1/RF.MaxCount)#
+	}else{#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / RF.Matrix.Scale[iRow,iCol]#
+	}#
+}#
+PS.Max = max(PS.Vec[,3])#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if(PS.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",PS.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",PS.Max,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/prop.",CELL,".txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+PS.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+#
+for ( i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if (RF.Vec[i,3] == 0){#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / (1/RF.MaxCount)#
+	}else{#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / RF.Matrix.Scale[i,3]#
+	}#
+}#
+PS.Max = max(PS.Vec[,3])#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if(PS.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",PS.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",PS.Max,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/prop.",CELL,".txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+PS.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+#
+for ( i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if (RF.Vec[i,3] == 0){#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / (1/RF.MaxCount)#
+	}else{#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / RF.Matrix.Scale[i,3]#
+	}#
+}#
+PS.Max = max(PS.Vec[,3])#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if(PS.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",PS.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",PS.Max,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/prop.",CELL,".txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+PS.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+#
+for ( i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if (RF.Vec[i,3] == 0){#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / (1/RF.MaxCount)#
+	}else{#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / RF.Vec[i,3]#
+	}#
+}#
+PS.Max = max(PS.Vec[,3])#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if(PS.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",PS.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",PS.Max,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/prop.",CELL,".txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+PermutaionTest = function(xcount,xtotal,ycount,ytotal){#
+	m = 100#
+	nx = xtotal#
+	ny = ytotal#
+	nz = nx+ny#
+	zcount = xcount + ycount#
+	MeanDiff = xcount/nx - ycount/ny#
+	DiffVec = rep(0,m)#
+	for( i in 1:m){#
+		sampleind = sample(nz,zcount)#
+		xcount.rnd = length(which(sampleind < nx))#
+		ycount.rnd = zcount-xcount.rnd#
+		DiffVec[i] = xcount.rnd/nx - ycount.rnd/ny#
+	}#
+	#p-value for two-side test#
+	pvalue = sum(abs(DiffVec) > abs(MeanDiff)) /m#
+	# if (pvalue ==0){ pvalue=1/m }#
+}#
+#
+#
+Sign.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	Diff = CF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]]/MaxCount - RF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]]/RF.MaxCount#
+	if (Diff > 0){#
+		Sign.Vec[i,3] = 1#
+	}else{#
+		Sign.Vec[i,3] = -1		#
+	}#
+}#
+#
+PValue.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	cat(i,"/",nrow(ConInd_Vec),"\n")#
+	PValue.Vec[i,3] = PermutaionTest(CF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]],MaxCount, RF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]], RF.MaxCount)#
+}#
+#
+P.Cut = 0.05#
+P.SigInd = p.adjust(PValue.Vec[,3],method="fdr") <= P.Cut
+PS.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+#
+for ( i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if (RF.Vec[i,3] == 0){#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / (1/RF.MaxCount)#
+	}else{#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / RF.Vec[i,3]#
+	}#
+}#
+PS.Max = max(PS.Vec[,3])#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if(PS.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",PS.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",PS.Max,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/prop.",CELL,".txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+PermutaionTest = function(xcount,xtotal,ycount,ytotal){#
+	m = 100#
+	nx = xtotal#
+	ny = ytotal#
+	nz = nx+ny#
+	zcount = xcount + ycount#
+	MeanDiff = xcount/nx - ycount/ny#
+	DiffVec = rep(0,m)#
+	for( i in 1:m){#
+		sampleind = sample(nz,zcount)#
+		xcount.rnd = length(which(sampleind < nx))#
+		ycount.rnd = zcount-xcount.rnd#
+		DiffVec[i] = xcount.rnd/nx - ycount.rnd/ny#
+	}#
+	#p-value for two-side test#
+	pvalue = sum(abs(DiffVec) > abs(MeanDiff)) /m#
+	# if (pvalue ==0){ pvalue=1/m }#
+}#
+#
+#
+Sign.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	Diff = CF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]]/MaxCount - RF.Vec[i,3]/RF.MaxCount#
+	if (Diff > 0){#
+		Sign.Vec[i,3] = 1#
+	}else{#
+		Sign.Vec[i,3] = -1		#
+	}#
+}#
+#
+PValue.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	cat(i,"/",nrow(ConInd_Vec),"\n")#
+	PValue.Vec[i,3] = PermutaionTest(CF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]],MaxCount, RF.Vec[i,3], RF.MaxCount)#
+}#
+#
+P.Cut = 0.05#
+P.SigInd = p.adjust(PValue.Vec[,3],method="fdr") <= P.Cut#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(PValue.Vec)){#
+	iRow = PValue.Vec[i,1]#
+	iCol = PValue.Vec[i,2]#
+	if(P.SigInd[i]==F | Sign.Vec[i,3]==-1){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",0.1)#
+	maxfreq = sprintf("id=%d",1,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/pval.pos.",CELL,".txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(PValue.Vec)){#
+	iRow = PValue.Vec[i,1]#
+	iCol = PValue.Vec[i,2]#
+	if(P.SigInd[i]==F | Sign.Vec[i,3]==1){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",0.1)#
+	maxfreq = sprintf("id=%d",1,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/pval.neg.",CELL,".txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+ConInd_Vec
+example(combn)
+?comb
+?combn
+combn(letters[1:4], 2)
+combn(c(1:4),2)
+t(combn(c(1:4),2))
+t(combn(c(1:68),2))
+RFAll.Vec = cbind(t(combn(1:nrow(CF.Matrix))),rep(0,nrow(CF.Matrix)))
+RFAll.Vec = cbind(t(combn(1:nrow(CF.Matrix),2)),rep(0,nrow(CF.Matrix)))
+combn(1:nrow(CF.Matrix), 2)
+t(combn(1:nrow(CF.Matrix), 2))
+cbind(t(combn(1:nrow(CF.Matrix), 2)),rep(0,nrow(CF.Matrix))
+)
+t(combn(1:nrow(CF.Matrix), 2))
+cbind(t(combn(1:nrow(CF.Matrix), 2)),rep(0,nrow(CF.Matrix)))
+cbind(t(combn(1:nrow(CF.Matrix), 2)),t(combn(1:nrow(CF.Matrix), 2)))
+rep(0,2278)
+str(t(combn(1:nrow(CF.Matrix), 2)))
+str(rep(0,4))
+cbind(t(combn(1:nrow(CF.Matrix), 2)),rep(0,nrow(CF.Matrix)))
+rep(0,nrow(CF.Matrix))
+AllComb = t(combn(1:nrow(CF.Matrix), 2))#
+RFAll.Vec = cbind(AllComb,rep(0,nrow(AllComb)))#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	MatchInd = which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)#
+	if(length(MatchInd)>0){#
+		RFAll.Vec[i,3] = max(RFData[MatchInd,3])#
+	}#
+}
+RFAll.Vec
+AllComb = t(combn(1:nrow(CF.Matrix), 2))#
+RFAll.Vec = cbind(AllComb,rep(0,nrow(AllComb)))#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	MatchInd = which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)#
+	if(length(MatchInd)>0){#
+		RFAll.Vec[i,3] = max(RFData[MatchInd,3])#
+	}#
+}#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	if(RF.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",RFAll.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",RF.MaxCount,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/contactfreq.ensemble.txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	if(RF.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	# Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	# freq = sprintf("thickness=%.2f",RFAll.Vec[i,3])#
+	# maxfreq = sprintf("id=%.2f",RF.MaxCount,sep="")#
+	# params = paste(freq,",",maxfreq,sep="")#
+	# LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	# LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	# if(RF.Vec[i,3]==0){next}#
+	# PositionStr1.1 = IntervalPoints[iRow]#
+	# PositionStr1.2 = IntervalPoints[iRow+1]#
+	# PositionStr2.1 = IntervalPoints[iCol]#
+	# PositionStr2.2 = IntervalPoints[iCol+1]#
+	# Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	# freq = sprintf("thickness=%.2f",RFAll.Vec[i,3])#
+	# maxfreq = sprintf("id=%.2f",RF.MaxCount,sep="")#
+	# params = paste(freq,",",maxfreq,sep="")#
+	# LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	# LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}
+AllComb = t(combn(1:nrow(CF.Matrix), 2))#
+RFAll.Vec = cbind(AllComb,rep(0,nrow(AllComb)))#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	MatchInd = which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)#
+	if(length(MatchInd)>0){#
+		RFAll.Vec[i,3] = max(RFData[MatchInd,3])#
+	}#
+}
+	iRow = RFAll.Vec[i,1]
+iRow
+IntervalPoints
+IntervalPoints
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	if(RF.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	# Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	# freq = sprintf("thickness=%.2f",RFAll.Vec[i,3])#
+	# maxfreq = sprintf("id=%.2f",RF.MaxCount,sep="")#
+	# params = paste(freq,",",maxfreq,sep="")#
+	# LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	# LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}
+iCol
+iRow
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	if(RFAll.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	# Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	# freq = sprintf("thickness=%.2f",RFAll.Vec[i,3])#
+	# maxfreq = sprintf("id=%.2f",RF.MaxCount,sep="")#
+	# params = paste(freq,",",maxfreq,sep="")#
+	# LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	# LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	if(RFAll.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",RFAll.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",RF.MaxCount,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/contactfreq.ensemble.txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)
+#!/usr/bin/R#
+rm(list=ls())#
+#------------------------------------------------------------------#
+# Parameter#
+#------------------------------------------------------------------#
+SourcePath = "data/ENm008/"#
+CELL = "GM12878"#
+CELL = "K562"#
+ReferenceCountFile = paste("data/analysis/ENm008/6400.comb.txt",sep="")#
+BinSize = 60#
+#
+#------------------------------------------------------------------#
+# Get MaxRead between GM12878 and K562#
+#------------------------------------------------------------------#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_GM12878.txt",#
+	sep="")#
+ContactFrequencyData_1 = read.table(ContactFrequencyFile)#
+#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_K562.txt",#
+	sep="")#
+ContactFrequencyData_2 = read.table(ContactFrequencyFile)#
+MaxCount = max(ContactFrequencyData_1,ContactFrequencyData_2)
+rownmaes(ContactFrequencyData_1)
+row.names(ContactFrequencyData_1)
+col.names(ContactFrequencyData_1)
+colnames(ContactFrequencyData_1)
+example(p.adjust)
+?p.adjust
+#!/usr/bin/R#
+rm(list=ls())#
+#------------------------------------------------------------------#
+# Parameter#
+#------------------------------------------------------------------#
+SourcePath = "data/ENm008/"#
+CELL = "GM12878"#
+CELL = "K562"#
+ReferenceCountFile = paste("data/analysis/ENm008/6400.comb.txt",sep="")#
+BinSize = 60#
+#
+#------------------------------------------------------------------#
+# Get MaxRead between GM12878 and K562#
+#------------------------------------------------------------------#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_GM12878.txt",#
+	sep="")#
+ContactFrequencyData_1 = read.table(ContactFrequencyFile)#
+#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_K562.txt",#
+	sep="")#
+ContactFrequencyData_2 = read.table(ContactFrequencyFile)#
+MaxCount = max(ContactFrequencyData_1,ContactFrequencyData_2)#
+#
+#------------------------------------------------------------------#
+# Read Contact Frequency#
+#------------------------------------------------------------------#
+#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_",CELL,".txt",#
+	sep="")#
+ContactFrequencyData = read.table(ContactFrequencyFile)#
+#
+Row_Ind_Start = as.numeric(sub(".*chr16:(.*)-(.*)","\\1",rownames(ContactFrequencyData)))#
+Row_Ind_End = as.numeric(sub(".*chr16:(.*)-(.*)","\\2",rownames(ContactFrequencyData)))#
+Row_Ind_Diff = Row_Ind_Start[2:(length(Row_Ind_Start))] - Row_Ind_End[1:(length(Row_Ind_End)-1)] #
+#
+Col_Ind_Start = as.numeric(sub(".*chr16\\.(.*)\\.(.*)","\\1",colnames(ContactFrequencyData)))#
+Col_Ind_End = as.numeric(sub(".*chr16\\.(.*)\\.(.*)","\\2",colnames(ContactFrequencyData)))#
+Col_Ind_Diff = Col_Ind_Start[2:(length(Col_Ind_Start))] - Col_Ind_End[1:(length(Col_Ind_End)-1)] #
+#
+#
+#------------------------------------------------------------------#
+# Output for circos highlight#
+#------------------------------------------------------------------#
+# Row_Str = paste("hs16",Row_Ind_Start,Row_Ind_End)#
+# Col_Str = paste("hs16",Col_Ind_Start,Col_Ind_End)#
+# #
+# of_circos_highlight = "/tmp/raw.segment.for.highlight.txt"#
+# write.table(file=of_circos_highlight,Row_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# of_circos_highlight = "/tmp/raw.segment.rev.highlight.txt"#
+# write.table(file=of_circos_highlight,Col_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+# Row_Sep_Str = paste(#
+# 	"hs16", Row_Ind_End[which(Row_Ind_Diff==0)]-2, Row_Ind_End[which(Row_Ind_Diff==0)]+2)#
+# of_circos_highlight = "/tmp/raw.segment.for.sep.highlight.txt"#
+# write.table(file=of_circos_highlight,Row_Sep_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+# Col_Sep_Str = paste(#
+# 	"hs16", Col_Ind_End[which(Col_Ind_Diff==0)]-2, Col_Ind_End[which(Col_Ind_Diff==0)]+2)#
+# of_circos_highlight = "/tmp/raw.segment.rev.sep.highlight.txt"#
+# write.table(file=of_circos_highlight,Col_Sep_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+#
+# iCount = 1#
+# LinkStr = ""#
+# for (i in 1:(length(Row_Ind_Start))){#
+# 	for (j in 1:(length(Col_Ind_Start))){#
+# 		if(ContactFrequencyData[i,j]==0){next}#
+# 		PositionStr1.1 = Row_Ind_Start[i]#
+# 		PositionStr1.2 = Row_Ind_End[i]#
+# 		PositionStr2.1 = Col_Ind_Start[j]#
+# 		PositionStr2.2 = Col_Ind_End[j]#
+# 		Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+# 		freq = sprintf("thickness=%d",ContactFrequencyData[i,j],sep="")#
+# 		maxfreq = sprintf("id=%d",MaxCount,sep="")#
+# 		params = paste(freq,",",maxfreq,sep="")#
+# 		LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+# 		LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+# 		iCount = iCount + 1#
+# 	}#
+# }#
+# #
+# of_circos_highlight = paste("/tmp/contactfreq.",CELL,".raw.txt",sep="")#
+# write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+#
+#------------------------------------------------------------------#
+# Reconstruct the reading count matrix, gap is considered.#
+#------------------------------------------------------------------#
+# Start from Col_Col_Start, Col_Ind_Start = 1#
+MinLength = min(Row_Ind_End-Row_Ind_Start,Col_Ind_End - Col_Ind_Start)#
+#
+Row_Vec = cbind(Row_Ind_Start,Row_Ind_End)#
+Col_Vec = cbind(Col_Ind_Start,Col_Ind_End)#
+All_Vec = rbind(Row_Vec,Col_Vec)#
+All_Vec_Sort = sort(All_Vec[,1],index.return=T)#
+All_Vec = All_Vec[All_Vec_Sort$ix,]#
+All_Vec_Diff = (All_Vec[,1])[2:nrow(All_Vec)] - (All_Vec[,2])[1:(nrow(All_Vec)-1)]#
+#
+# expand the gap sequence length less than min seq length#
+MinInd = which(All_Vec_Diff <MinLength & All_Vec_Diff != 0)#
+All_Vec[MinInd,2] = All_Vec[MinInd,2] + All_Vec_Diff[MinInd]#
+All_Vec_Diff[MinInd] = 0#
+#
+# insert the gap and resort, get segment interval#
+Gap_Vec = cbind((All_Vec[,2])[1:(nrow(All_Vec)-1)], (All_Vec[,2])[1:(nrow(All_Vec)-1)] + All_Vec_Diff)#
+All_Vec = rbind(All_Vec,Gap_Vec[which(All_Vec_Diff!=0),])#
+All_Vec_Sort = sort(All_Vec[,1],index.return=T)#
+All_Vec = All_Vec[All_Vec_Sort$ix,]#
+#
+nSize = nrow(All_Vec)#
+IntervalPoints = unique(sort(c(All_Vec)))#
+#
+CF.Matrix = matrix(0,nrow=nSize,ncol=nSize)#
+for ( i in 1:nrow(ContactFrequencyData)){#
+	for (j in 1:ncol(ContactFrequencyData)){#
+		r1 = findInterval(Row_Vec[i,1], IntervalPoints)#
+		r2 = findInterval(Row_Vec[i,2]-1, IntervalPoints)#
+		c1 = findInterval(Col_Vec[j,1], IntervalPoints)#
+		c2 = findInterval(Col_Vec[j,2]-1, IntervalPoints)#
+		if (r1 == r2 & c1 == c2 ){#
+			CF.Matrix[r1,c1] = CF.Matrix[c1,r1] = ContactFrequencyData[i,j]#
+		}#
+	}#
+}#
+#
+# recode index arr fo contact frequence do not equal to 0#
+ConInd_Vec = which(CF.Matrix!=0,arr.ind=T)#
+# only get upper right index#
+ConInd_Vec = ConInd_Vec[which(ConInd_Vec[,1]<ConInd_Vec[,2]),]#
+# scale matrix#
+CF.Matrix.Scale = CF.Matrix/MaxCount#
+#
+#------------------------------------------------------------------#
+# Read reference data, and merge to experimental segment#
+#------------------------------------------------------------------#
+RFData = read.table(ReferenceCountFile)#
+#
+RF.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	MatchInd = which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)#
+	if(length(MatchInd)>0){#
+		RF.Vec[i,3] = max(RFData[MatchInd,3])#
+	}#
+}#
+RF.MaxCount = max(RFData)#
+RF.Vec.Scale = RF.Vec#
+RF.Vec.Scale[,3] = RF.Vec.Scale[,3]/ RF.MaxCount#
+#
+#------------------------------------------------------------------#
+# All combination ensemble contact for circos#
+#------------------------------------------------------------------#
+#
+AllComb = t(combn(1:nrow(CF.Matrix), 2))#
+RFAll.Vec = cbind(AllComb,rep(0,nrow(AllComb)))#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	MatchInd = which(findInterval((RFData[,1]-1)*BinSize+1,IntervalPoints) == iRow & findInterval((RFData[,2]-1)*BinSize+1,IntervalPoints) == iCol)#
+	if(length(MatchInd)>0){#
+		RFAll.Vec[i,3] = max(RFData[MatchInd,3])#
+	}#
+}#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(RFAll.Vec)){#
+	iRow = RFAll.Vec[i,1]#
+	iCol = RFAll.Vec[i,2]#
+	if(RFAll.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",RFAll.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",RF.MaxCount,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/contactfreq.ensemble.txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+#
+#------------------------------------------------------------------#
+# Propensity#
+#------------------------------------------------------------------#
+PS.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+#
+for ( i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if (RF.Vec[i,3] == 0){#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / (1/RF.MaxCount)#
+	}else{#
+		PS.Vec[i,3] = CF.Matrix.Scale[iRow,iCol] / RF.Vec[i,3]#
+	}#
+}#
+PS.Max = max(PS.Vec[,3])#
+#
+iCount = 1#
+LinkStr = ""#
+for (i in 1:nrow(ConInd_Vec)){#
+	iRow = ConInd_Vec[i,1]#
+	iCol = ConInd_Vec[i,2]#
+	if(PS.Vec[i,3]==0){next}#
+	PositionStr1.1 = IntervalPoints[iRow]#
+	PositionStr1.2 = IntervalPoints[iRow+1]#
+	PositionStr2.1 = IntervalPoints[iCol]#
+	PositionStr2.2 = IntervalPoints[iCol+1]#
+	Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+	freq = sprintf("thickness=%.2f",PS.Vec[i,3])#
+	maxfreq = sprintf("id=%.2f",PS.Max,sep="")#
+	params = paste(freq,",",maxfreq,sep="")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+	LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+	iCount = iCount + 1#
+}#
+#
+of_circos_highlight = paste("/tmp/prop.",CELL,".txt",sep="")#
+write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+#
+#
+#------------------------------------------------------------------#
+# Permutation test for P-value#
+#------------------------------------------------------------------#
+#
+PermutaionTest = function(xcount,xtotal,ycount,ytotal){#
+	m = 100#
+	nx = xtotal#
+	ny = ytotal#
+	nz = nx+ny#
+	zcount = xcount + ycount#
+	MeanDiff = xcount/nx - ycount/ny#
+	DiffVec = rep(0,m)#
+	for( i in 1:m){#
+		sampleind = sample(nz,zcount)#
+		xcount.rnd = length(which(sampleind < nx))#
+		ycount.rnd = zcount-xcount.rnd#
+		DiffVec[i] = xcount.rnd/nx - ycount.rnd/ny#
+	}#
+	#p-value for two-side test#
+	pvalue = sum(abs(DiffVec) > abs(MeanDiff)) /m#
+	# if (pvalue ==0){ pvalue=1/m }#
+}#
+#
+#
+Sign.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	Diff = CF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]]/MaxCount - RF.Vec[i,3]/RF.MaxCount#
+	if (Diff > 0){#
+		Sign.Vec[i,3] = 1#
+	}else{#
+		Sign.Vec[i,3] = -1		#
+	}#
+}#
+#
+PValue.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	cat(i,"/",nrow(ConInd_Vec),"\n")#
+	PValue.Vec[i,3] = PermutaionTest(CF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]],MaxCount, RF.Vec[i,3], RF.MaxCount)#
+}#
+#
+P.Cut = 0.05#
+P.SigInd = p.adjust(PValue.Vec[,3],method="fdr") <= P.Cut
+PValue.Vec[,3]
+PValue.Vec[,3] < P.Cut
+which(PValue.Vec[,3] < P.Cut)
+length(which(PValue.Vec[,3] < P.Cut))
+P.SigInd
+length(P.SigInd)
+length(which(PValue.Vec[,3] < P.Cut))
+PermutaionTest = function(xcount,xtotal,ycount,ytotal){#
+	m = 1000#
+	nx = xtotal#
+	ny = ytotal#
+	nz = nx+ny#
+	zcount = xcount + ycount#
+	MeanDiff = xcount/nx - ycount/ny#
+	DiffVec = rep(0,m)#
+	for( i in 1:m){#
+		sampleind = sample(nz,zcount)#
+		xcount.rnd = length(which(sampleind < nx))#
+		ycount.rnd = zcount-xcount.rnd#
+		DiffVec[i] = xcount.rnd/nx - ycount.rnd/ny#
+	}#
+	#p-value for two-side test#
+	pvalue = sum(abs(DiffVec) > abs(MeanDiff)) /m#
+	# if (pvalue ==0){ pvalue=1/m }#
+}#
+#
+#
+Sign.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	Diff = CF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]]/MaxCount - RF.Vec[i,3]/RF.MaxCount#
+	if (Diff > 0){#
+		Sign.Vec[i,3] = 1#
+	}else{#
+		Sign.Vec[i,3] = -1		#
+	}#
+}#
+#
+PValue.Vec = cbind(ConInd_Vec,rep(0,nrow(ConInd_Vec)))#
+for (i in 1:nrow(ConInd_Vec)){#
+	cat(i,"/",nrow(ConInd_Vec),"\n")#
+	PValue.Vec[i,3] = PermutaionTest(CF.Matrix[ConInd_Vec[i,1],ConInd_Vec[i,2]],MaxCount, RF.Vec[i,3], RF.MaxCount)#
+}#
+#
+P.Cut = 0.05#
+P.SigInd = p.adjust(PValue.Vec[,3],method="fdr") <= P.Cut
+which(P.SigInd)
+length(which(P.SigInd))
+length(PValue.Vec[,3])
+max(ContactFrequencyData_1)
+max(ContactFrequencyData_2)
+rownames(ContactFrequencyData_1)
+colnames(ContactFrequencyData_1)
+edit(ContactFrequencyData_1)
+sum(ContactFrequencyData_1)
+sum(ContactFrequencyData_2)
+#!/usr/bin/R#
+####################################################################
+# Get contact index according to segment (starting and end)#
+####################################################################
+#
+#
+#
+rm(list=ls())#
+#------------------------------------------------------------------#
+# Parameter#
+#------------------------------------------------------------------#
+SourcePath = "data/ENm008/"#
+CELL = "GM12878"#
+CELL = "K562"#
+ReferenceCountFile = paste("data/analysis/ENm008/6400.comb.txt",sep="")#
+BinSize = 60#
+#
+#------------------------------------------------------------------#
+# Get MaxRead between GM12878 and K562#
+#------------------------------------------------------------------#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_GM12878.txt",#
+	sep="")#
+ContactFrequencyData_1 = read.table(ContactFrequencyFile)#
+#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_K562.txt",#
+	sep="")#
+ContactFrequencyData_2 = read.table(ContactFrequencyFile)#
+MaxCount = max(ContactFrequencyData_1,ContactFrequencyData_2)#
+#
+#------------------------------------------------------------------#
+# Read Contact Frequency#
+#------------------------------------------------------------------#
+#
+ContactFrequencyFile = paste(SourcePath,"Nature_2010_5CFrequencyCountsMatrix_ENm008_",CELL,".txt",#
+	sep="")#
+ContactFrequencyData = read.table(ContactFrequencyFile)#
+#
+Row_Ind_Start = as.numeric(sub(".*chr16:(.*)-(.*)","\\1",rownames(ContactFrequencyData)))#
+Row_Ind_End = as.numeric(sub(".*chr16:(.*)-(.*)","\\2",rownames(ContactFrequencyData)))#
+Row_Ind_Diff = Row_Ind_Start[2:(length(Row_Ind_Start))] - Row_Ind_End[1:(length(Row_Ind_End)-1)] #
+#
+Col_Ind_Start = as.numeric(sub(".*chr16\\.(.*)\\.(.*)","\\1",colnames(ContactFrequencyData)))#
+Col_Ind_End = as.numeric(sub(".*chr16\\.(.*)\\.(.*)","\\2",colnames(ContactFrequencyData)))#
+Col_Ind_Diff = Col_Ind_Start[2:(length(Col_Ind_Start))] - Col_Ind_End[1:(length(Col_Ind_End)-1)] #
+#
+#
+#------------------------------------------------------------------#
+# Output for circos highlight#
+#------------------------------------------------------------------#
+# Row_Str = paste("hs16",Row_Ind_Start,Row_Ind_End)#
+# Col_Str = paste("hs16",Col_Ind_Start,Col_Ind_End)#
+# #
+# of_circos_highlight = "/tmp/raw.segment.for.highlight.txt"#
+# write.table(file=of_circos_highlight,Row_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# of_circos_highlight = "/tmp/raw.segment.rev.highlight.txt"#
+# write.table(file=of_circos_highlight,Col_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+# Row_Sep_Str = paste(#
+# 	"hs16", Row_Ind_End[which(Row_Ind_Diff==0)]-2, Row_Ind_End[which(Row_Ind_Diff==0)]+2)#
+# of_circos_highlight = "/tmp/raw.segment.for.sep.highlight.txt"#
+# write.table(file=of_circos_highlight,Row_Sep_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+# Col_Sep_Str = paste(#
+# 	"hs16", Col_Ind_End[which(Col_Ind_Diff==0)]-2, Col_Ind_End[which(Col_Ind_Diff==0)]+2)#
+# of_circos_highlight = "/tmp/raw.segment.rev.sep.highlight.txt"#
+# write.table(file=of_circos_highlight,Col_Sep_Str,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+# #
+#
+# iCount = 1#
+# LinkStr = ""#
+# for (i in 1:(length(Row_Ind_Start))){#
+# 	for (j in 1:(length(Col_Ind_Start))){#
+# 		if(ContactFrequencyData[i,j]==0){next}#
+# 		PositionStr1.1 = Row_Ind_Start[i]#
+# 		PositionStr1.2 = Row_Ind_End[i]#
+# 		PositionStr2.1 = Col_Ind_Start[j]#
+# 		PositionStr2.2 = Col_Ind_End[j]#
+# 		Field1 = paste("segdup",sprintf("%04d hs16", iCount),sep="")#
+# 		freq = sprintf("thickness=%d",ContactFrequencyData[i,j],sep="")#
+# 		maxfreq = sprintf("id=%d",MaxCount,sep="")#
+# 		params = paste(freq,",",maxfreq,sep="")#
+# 		LinkStr = paste(LinkStr, paste(Field1," ",PositionStr2.1," ",PositionStr2.2," ",params,sep=""),sep="\n")#
+# 		LinkStr = paste(LinkStr, paste(Field1," ",PositionStr1.1," ",PositionStr1.2," ",params,sep=""),sep="\n")#
+# 		iCount = iCount + 1#
+# 	}#
+# }#
+# #
+# of_circos_highlight = paste("/tmp/contactfreq.",CELL,".raw.txt",sep="")#
+# write.table(file=of_circos_highlight,LinkStr,quote=FALSE,row.names=FALSE,col.names=FALSE)#
+#
+#------------------------------------------------------------------#
+# Reconstruct the reading count matrix, gap is considered.#
+#------------------------------------------------------------------#
+# Start from Col_Col_Start, Col_Ind_Start = 1#
+MinLength = min(Row_Ind_End-Row_Ind_Start,Col_Ind_End - Col_Ind_Start)#
+#
+Row_Vec = cbind(Row_Ind_Start,Row_Ind_End)#
+Col_Vec = cbind(Col_Ind_Start,Col_Ind_End)#
+All_Vec = rbind(Row_Vec,Col_Vec)#
+All_Vec_Sort = sort(All_Vec[,1],index.return=T)#
+All_Vec = All_Vec[All_Vec_Sort$ix,]#
+All_Vec_Diff = (All_Vec[,1])[2:nrow(All_Vec)] - (All_Vec[,2])[1:(nrow(All_Vec)-1)]#
+#
+# expand the gap sequence length less than min seq length#
+MinInd = which(All_Vec_Diff <MinLength & All_Vec_Diff != 0)#
+All_Vec[MinInd,2] = All_Vec[MinInd,2] + All_Vec_Diff[MinInd]#
+All_Vec_Diff[MinInd] = 0#
+#
+# insert the gap and resort, get segment interval#
+Gap_Vec = cbind((All_Vec[,2])[1:(nrow(All_Vec)-1)], (All_Vec[,2])[1:(nrow(All_Vec)-1)] + All_Vec_Diff)#
+All_Vec = rbind(All_Vec,Gap_Vec[which(All_Vec_Diff!=0),])#
+All_Vec_Sort = sort(All_Vec[,1],index.return=T)#
+All_Vec = All_Vec[All_Vec_Sort$ix,]#
+#
+nSize = nrow(All_Vec)#
+IntervalPoints = unique(sort(c(All_Vec)))
+IntervalPoints
+60*8000
+seq(1,499411,by=60)
+findInterval(seq(1,499411,by=60),IntervalPoints)
+IntervalPoints
+IntervalPoints[-1]
+max(IntervalPoints)
+?cumsum
+cummin(c(3:1, 2:0, 4:2))
+(c(3:1, 2:0, 4:2))
+??dif
+c(3:1)
+MinSpace = min(IntervalPoints[2:length(IntervalPoints)] - IntervalPoints[1:(length(IntervalPoints)-1)])#
+EquSpacePoints = seq(1,max(IntervalPoints),by=MinSpace)
+MinSpace
+EquSpacePoints
+IntervalPoints
+	SegPoints = IntervalPoints#
+	MinSpace = min(SegPoints[2:length(SegPoints)] - SegPoints[1:(length(SegPoints)-1)])#
+	EquSpacePoints = seq(1,max(SegPoints),by=MinSpace)
+length(SegPoints)
+	EquSpacePoints = seq(1,max(SegPoints),by=MinSpace)
+EquSpacePoints
+  PointsInd = findInterval(EquSpacePoints,SegPoints)
+PointsInd
+PointsInd
+which(PointsInd)==1
+which(PointsInd==1)
+min(which(PointsInd==1))
+max(which(PointsInd==1))
+max(which(PointsInd==2))
+min(which(PointsInd==2))
+	SegPoints = IntervalPoints#
+	NumPoints = length(SegPoints)#
+	NumSeg = NumPoints - 1#
+	MinSpace = min(SegPoints[2:NumPoints] - SegPoints[1:(NumPoints-1)])#
+	EquSpacePoints = seq(1,max(SegPoints),by=MinSpace)#
+  PointsInd = findInterval(EquSpacePoints,SegPoints)#
+	StartEndInd.Vec = matrix(0,nrow=NumSeg,ncol=2)#
+	for (i in 1:NumSeg){#
+		StartEndInd.Vec[i,] = c(min(which(PointsInd==i)),max(which(PointsInd==i)))#
+	}
+StartEndInd.Vec
+	unique(sort(StartEndInd.Vec))
+StartEndInd.Vec[,2] - StartEndInd.Vec[,1]
+StartEndInd.Vec[15,2]
+StartEndInd.Vec[15,]
+PointsInd
+which(PointsInd==15)
+IntervalPoints
+IntervalPoints[15]
+IntervalPoints[16]
+86217 - 86128
+rownames(ContactFrequencyData)
+ConStartEndInd = GetStartEndInd(IntervalPoints)
+GetStartEndInd = function(SegPoints){#
+	SegPoints = IntervalPoints#
+	NumPoints = length(SegPoints)#
+	NumSeg = NumPoints - 1#
+	MinSpace = min(SegPoints[2:NumPoints] - SegPoints[1:(NumPoints-1)])#
+	EquSpacePoints = seq(1,max(SegPoints),by=MinSpace)#
+  PointsInd = findInterval(EquSpacePoints,SegPoints)#
+	StartEndInd.Vec = matrix(0,nrow=NumSeg,ncol=2)#
+	for (i in 1:NumSeg){#
+		StartEndInd.Vec[i,] = c(min(which(PointsInd==i)),max(which(PointsInd==i)))#
+	}#
+	unique(sort(StartEndInd.Vec))#
+}#
+#--------------------#
+# output contact index file#
+#--------------------#
+ConStartEndInd = GetStartEndInd(IntervalPoints)
+ConStartEndInd
+write.table(ConStartEndInd)
+write.table(ConStartEndInd,quote=FALSE,row.names=FALSE,col.names=FALSE)
